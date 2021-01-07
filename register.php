@@ -53,7 +53,7 @@ if(isset($username) && preg_match('/^[a-zA-Z0-9]+$/', $username)){
   $uppercase = preg_match('@[A-Z]@', $password);
   $lowercase = preg_match('@[a-z]@', $password);
   $number    = preg_match('@[0-9]@', $password);
-
+  var_dump($password);
  if (isset($password) && $uppercase && $lowercase && $number && strlen($password) > 8 ){
   array_push($newUser,$password);
 } else {
@@ -67,7 +67,7 @@ if(isset($username) && preg_match('/^[a-zA-Z0-9]+$/', $username)){
 
 
 
-// Show the user their information
+// Show the user their information and Save the user
 
 if(count($newUser) == 5) {
   echo   "<div><h4>This is you welcome!</h4><ul>" ;
@@ -75,6 +75,7 @@ if(count($newUser) == 5) {
     echo "<li>".$new."</li>";
   }
    echo "</ul></div>";
+   saveUser($newUser,$db);
 }
 
 // if there is error's there will be shown
@@ -85,41 +86,47 @@ if(count($errors) > 0) {
   }
    echo "</ul></div>" . "<a href='index.php'>try again</a>";
 }
+
+
+
+
+
 /*
-* createUser
-* accepts strings.
-* returs array();
+* saveUser($user,$db)
+*
+* $user array
+*$db string.txt
 *
 */
 
 
-function createUser($name, $email, $age, $gender, $password) {
+function saveUser($user,$db){
 
+// Open the db.txt
+$open = fopen($db,"a+") or exit("Unable to open file!");
 
+//Add the User
+fwrite($open,serialize($user));
+
+//add a newline
+$numberNewline = "\n";
+fwrite($open, $numberNewline);
+
+//close the file
+fclose($open);
 
 }
+
 
 /*
-* saveUser
-* accepts array
+* check if the username (login) is one
 *
 */
-file_put_contents($db,$newUser);
 
-function saveUser($user){
-  // Check if the $db exists
-  if(file_exists($db)) {
-  $content = file_get_contents($db);
-  // Check if the user all ready registered
-  if(str_contains($content)){
-    echo "This user all ready registered please try to login";
-  }
-  } else {
-    echo 'Couldn\'t find the database file';
-  }
-
-
+function checkUserName($username,$db) {
+  $open = fopen($db,"r") or exit("Unable to read file!");
+  print_r(unserialize(file_get_contents($db)));
 }
+checkUserName($newUser,$db)
 
-saveUser($newUser);
  ?>
