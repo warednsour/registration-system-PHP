@@ -30,9 +30,9 @@
   <div class="register">
       <h1>Регистрация</h1>
     <form class="" action="register.php" method="post">
-      <input type="text" name="login" value="" placeholder="Имя ползователь">
+      <input type="text" name="username" value="" placeholder="Имя ползователь">
       <input type="email" name="email" value="" placeholder="электронную почту">
-      <input type="text" name="age" value=""placeholder="Возрост">
+      <input type="number" name="age" value=""placeholder="Возрост">
       <div class="ward">
       <input type="radio" id="male" name="sex" value="male">
       <i class="fas fa-male" > Male</i>
