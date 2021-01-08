@@ -15,7 +15,7 @@ body {
   	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
   	margin: 100px auto;
 }
-.register h1 {
+.register h1,h2,h3,h4,h5 {
   	text-align: center;
   	color: #5b6574;
   	font-size: 24px;
@@ -44,7 +44,7 @@ body {
   	margin-bottom: 20px;
   	padding: 0 15px;
 }
-.register form input[type="submit"] {
+.register form input[type="submit"], a {
   	width: 100%;
   	padding: 15px;
   	margin-top: 20px;
@@ -58,4 +58,9 @@ body {
 .register form input[type="submit"]:hover {
 	background-color: #2868c7;
   	transition: background-color 0.2s;
+}
+
+a {
+  text-align: center;
+  display: block;
 }

@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="master.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-    <title></title>
-  </head>
-  <body>
+<?php
+  session_start();
+?>
 
 
+<?php include('header.php')?>
+
+<?php
+//Check if the user logged in
+ if(!isset($_SESSION['username'])) { ?>
       <!-- Form for login -->
     <div class="register">
       <h1>Логин</h1>
@@ -43,5 +42,22 @@
       <input type="submit" name="submit" value="Регистрация">
     </form>
     </div>
-  </body>
-</html>
+  <?php
+  // If the user is logged in
+} else {
+   ?>
+    <div class ="register">
+      <h1>List of information about you!</h1>
+      <ul>
+        <li>username :<?= $_SESSION['username']?></li>
+        <li>email :<?= $_SESSION['email']?></li>
+        <li>age :<?= $_SESSION['age']?></li>
+        <li>sex :<?= $_SESSION['sex']?></li>
+      </ul>
+      <form action="logout.php">
+        <input type="submit" name="logout" value="logout">
+      </form>
+    </div>
+    <?php }
+    include('footer.php');
+    ?>
